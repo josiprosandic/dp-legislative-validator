@@ -1,0 +1,16 @@
+Upute za postavljanje aplikacije:
+by: Josip Rosandic
+Deklarativno programiranje
+--
+
+Datoteka lex.flr mora biti u direktoriju u kojemu se nalazi skripta runflora.
+
+Aplikacija se pokreće tako da se u direktoriju u kojemu se nalaze sve potrebne datoteke pokrene lokalni poslužitelj naredbom
+"python3 flora-app.py".
+
+U terminalu će se ispisati poveznica putem koje se može pristupiti aplikacijskom sučelju.
+
+Napomena: potrebno je na računalu imati flora-2 framework!
+
+
+

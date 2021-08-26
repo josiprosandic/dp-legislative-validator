@@ -1,0 +1,278 @@
+<html>
+	<head>
+		<script src="/client.js"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+	</head>
+	<body style="font-family: 'Roboto', sans-serif;margin: auto;background-image: url(img/triangle-mosaic.png);">
+		<div style="text-align: center;padding: 20px;align-content: center;">
+			
+			<svg style="color: gray;" xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
+				<path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
+				<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+			  </svg>
+			
+			<h1>FORMALIZACIJA PRAVNE LEGISLATIVE U PRAVILA</h1>
+		
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 10px;margin-top: 50px;margin-left: 20px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<h3 style="padding: 0px;margin-bottom: 0px;font-weight: bolder;font-size: 20px;">PREDMET</h2>
+				<h2 style="padding:0px;margin-top: 0px;font-weight: lighter;font-size: 25px;">Deklarativno programiranje</h2>
+			</div>
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 10px;margin-top: 50px;margin-left: 20px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<h3 style="padding: 0px;margin-bottom: 0px;font-weight: bolder;font-size: 20px;">MENTOR</h2>
+				<h2 style="padding:0px;margin-top: 0px;font-size: 25px;">dr.sc. Bogdan Okreša Đurić</h2>
+			</div>
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 10px;margin-top: 50px;margin-left: 20px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<h3 style="padding: 0px;margin-bottom: 0px;font-weight: bolder;font-size: 20px;">STUDENT</h2>
+				<h2 style="padding:0px;margin-top: 0px;font-size: 25px;">Josip Rosandić</h2>
+			</div>
+
+			
+
+			<h3 style="padding: 0px;margin-bottom: 0px;margin-top: 100px;">PRAVNI AKT</h2>
+			<h2 style="padding:0px;margin-top: 0px;">Pravilnik o završnom radu na preddiplomskim studijima i diplomskom radu <br>na diplomskim studijima Fakulteta organizacije i informatike</h2>
+
+			<a href="https://www.foi.unizg.hr/sites/default/files/foi_pravilnik_o_zavrsnom_i_diplomskom_radu.pdf" target="_blank" rel="noopener noreferrer">
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" >Izvorni tekst pravilnika</button>
+			</a>
+			
+
+			<br>			
+			
+			<!--
+			<input type="text" name="unos" id="unos" />
+			<input type="button" value="Upit" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' />
+			<div id="rezultat" style="font-size: 80px;">A</div>
+			-->
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					ENTITET 1
+				</span> 
+				<h3 style="font-weight: bold;">Fakulteti</h3>
+				<div id="prikazFakulteta"></div>
+				
+				
+				<br>
+				<br>
+				
+				
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryFakulteti("?_:fakultet[naziv->?naziv].")'>Prikaži fakultete</button>
+				
+				
+			</div>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					ENTITET 2
+				</span> 
+				<h3 style="font-weight: bold;">Sveučilišta</h3>
+				<div id="prikazSveucilista"></div>
+				
+				<br>
+				<br>
+				
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QuerySveucilista("?_:sveuciliste[naziv->?naziv].")'>Prikaži sveučilišta</button>
+				
+				
+			</div>
+			
+			
+			<br>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					ENTITET 3
+				</span> 
+				<h3 style="font-weight: bold;">Nastavnici</h3>
+				<div id="prikazNastavnika"></div>
+				
+				<br>
+				<br>
+				
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryNastavnici("?_:nastavnik[ime->?ime, prezime->?prezime].")'>Prikaži nastavnike</button>
+				
+				
+			</div>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					ENTITET 4
+				</span> 
+				<h3 style="font-weight: bold;">Studenti</h3>
+				<div id="prikazStudenata"></div>
+				
+				<br>
+				<br>
+				
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryStudenti("?_:student[ime->?ime, prezime->?prezime].")'>Prikaži studente</button>
+				
+				
+			</div>
+
+			<br>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 850px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					ENTITET 5
+				</span> 
+				<h3 style="font-weight: bold;">Radovi</h3>
+				<div id="prikazRadova"></div>
+				
+				<br>
+				<br>
+				
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryRadovi("?_:rad[tema->?tema,student->?student,mentor->?mentor].")'>Prikaži radove</button>
+				
+				
+			</div>
+
+			<br>
+			
+
+			<h1 style="margin-top: 50px; font-weight:bold;">Implementirana pravila</h1>
+
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					PRAVILO 1
+				</span> 
+				<h3>Pravilo o završetku preddiplomskog studija</h3>
+				<h4>Sljedeći studenti mogu okončati studij:</h4>
+				<div id="pravilo1Rez"></div>
+				
+				<br>
+				<br>
+				<br>
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryPravilo1("?_:student[ime->?ime, moze_li_zavrsiti()->?mozeli].")'>Provjeri</button>
+				
+			</div>
+
+			<br>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					PRAVILO 2
+				</span> 
+				<h3>Pravilo o dokazu sposobnosti</h3>
+				<h4>Sljedeći studenti obranili su rad i dokazali sposobnost:</h4>
+				<div id="pravilo2Rez"></div>
+				
+				<br>
+				<br>
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryPravilo2("?_:student[ime->?ime, sposoban()->?sp].")'>Provjeri</button>
+				
+			</div>
+
+			<br>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					PRAVILO 3
+				</span> 
+				<h3>Pravilo o mentorstvu</h3>
+				<h4>Sljedeći zaposlenici ispunjavaju zahtjeve za mentorstvo:</h4>
+				<div id="pravilo3Rez"></div>
+				
+				<br>
+				<br>
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryPravilo3("?_:nastavnik[ime->?ime, moze_biti_mentor()->?m].")'>Provjeri</button>
+				
+			</div>
+
+			<br>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					PRAVILO 4
+				</span> 
+				<h3>Pravilo o postotku radova koje je moguće mentorirati</h3>
+				<h4>Unesite studij</h4>
+				<div id="pravilo4Rez"></div>
+				
+				<br>
+				<br>
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<input type="text" name="unos" id="pravilo4Unos" style="margin-bottom: 10px;" placeholder="Npr: ips"/><br>
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryPravilo4(document.getElementById( "pravilo4Unos" ).value)'>Provjeri</button>
+				
+			</div>
+
+			<br>
+
+			<div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);width: 450px;padding: 20px;margin-top: 50px;display: inline-block;background-color:#fefefe;border-radius: 15px;">
+				<span class="w3-tag w3-large w3-padding w3-round-large w3-blue">
+					PRAVILO 5
+				</span> 
+				<h3>Ukupan broj radova po mentoru</h3>
+				<h4>Unesite mentora i saznajte ukupan broj radova koje mentorira ili je mentorirao</h4>
+				<div id="pravilo5Rez"></div>
+				
+				<br>
+				<br>
+				
+				<!--
+				<input type="button" value="Pokreni validaciju" onclick='javascript:flora2Query( document.getElementById( "unos" ).value )' style="padding:5px;width:200px;cursor: pointer;" />
+				-->
+				<input type="text" name="unos" id="pravilo5Unos" style="margin-bottom: 10px;" placeholder="Npr: markus"/><br>
+				<button class="w3-button w3-white w3-border w3-border-gray w3-round-large" 
+					onclick='javascript:flora2QueryPravilo5(document.getElementById("pravilo5Unos").value)'>Provjeri</button>
+				
+			</div>
+
+			
+
+			<footer style="text-align:center;padding: 40px;margin-top: 30px;">
+				&copy; Josip Rosandić - Deklarativno programiranje | 2021
+			</footer>
+
+		</div>
+	</body>
+</html>

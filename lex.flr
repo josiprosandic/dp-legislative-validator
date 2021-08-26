@@ -1,0 +1,253 @@
+// rad
+rad[
+	tema => \string,
+	student => student,
+	mentor => nastavnik,
+	izraden => \boolean,
+	potvrden => \boolean,
+	obranjen => \boolean
+].
+
+zavrsni::rad[
+
+].
+
+diplomski::rad[
+
+].
+
+// institucije 
+sveuciliste[
+	naziv => \string,
+	grad => \string
+].
+
+fakultet[
+	naziv => \string,
+	grad => \string,
+	sveuciliste => sveuciliste
+].
+
+// studij
+studij[
+	naziv => \string,
+	trajanje => \integer,
+	institucija => fakultet,
+	ukupno_studenata => \integer
+].
+
+
+preddiplomski::studij[
+	br_stud_1 => \integer,
+	br_stud_2 => \integer,
+	br_stud_3 => \integer
+]. 
+
+diplomski::studij[
+	br_stud_1 => \integer,
+	br_stud_2 => \integer
+]. 
+
+// osobe
+osoba[
+	ime => \string,
+	prezime => \string,
+	email => \string,
+	institucija => fakultet
+].
+
+student::osoba[
+	studij => studij,
+	rad => rad,
+	polozeni_svi_ispiti => \boolean,
+
+	moze_li_zavrsiti() => \string,
+	sposoban() => \string
+].
+
+nastavnik::osoba[
+	zvanje => \string,
+	doktorat => \boolean,
+	godine_staza => \integer,
+
+	max_mentorstava(studij)=>\integer,
+	ukupno_radova(\nastavnik)=>\integer,
+	moze_biti_mentor()=>\string
+].
+
+
+// Instanciranje klasa
+
+// institucije
+unizg:sveuciliste[
+	naziv -> 'Sveučilište u Zagrebu',
+	grad -> Zagreb
+].
+
+foi:fakultet[
+	naziv -> 'Fakultet organizacije i informatike',
+	grad -> 'Varaždin',
+	sveuciliste -> unizg
+].
+
+// studiji
+ips:preddiplomski[
+	naziv -> 'Informacijski i poslovni sustavi',
+	trajanje -> 3,
+	institucija -> foi,
+	ukupno_studenata -> 500,
+	br_stud_1 -> 250,
+	br_stud_2 -> 180,
+	br_stud_3 -> 70
+].
+
+bpbz:diplomski[
+	naziv -> 'Baze podataka i baze znanja',
+	trajanje -> 2,
+	institucija -> foi,
+	ukupno_studenata -> 100,
+	br_stud_1 -> 65,
+	br_stud_2 -> 35
+].
+
+// osobe
+antonio:student[
+	ime -> Antonio,
+	prezime -> Levanti,
+	email -> 'alevanti@foi.hr',
+	institucija -> foi,
+	polozeni_svi_ispiti -> true,
+	rad -> modzn,
+	studij -> ips
+].
+
+josip:student[
+	ime -> Josip,
+	prezime -> Rosandic,
+	email -> 'jrosandic@foi.hr',
+	institucija -> foi,
+	polozeni_svi_ispiti -> true,
+	rad -> ipynb,
+	studij -> ips
+].
+
+thomas:student[
+	ime -> Thomas,
+	prezime -> Jefferson,
+	email -> 'jefferson@ucla.edu.com',
+	institucija -> foi,
+	polozeni_svi_ispiti -> true,
+	rad -> mlalgo,
+	studij -> bpbz
+].
+
+bogdan:nastavnik[
+	ime -> Bogdan,
+	prezime -> 'Okreša Đurić',
+	email -> 'dokresa@foi.hr',
+	institucija -> foi,
+	zvanje -> 'viši asistent',
+	doktorat -> true,
+	godine_staza -> 5
+].
+
+markus:nastavnik[
+	ime -> Markus,
+	prezime -> Schatten,
+	email -> 'mschatte@foi.hr',
+	institucija -> foi,
+	zvanje -> 'izvanredni profesor',
+	doktorat -> true,
+	godine_staza -> 20
+].
+
+// radovi
+modzn:zavrsni[
+	tema -> 'Modeliranje znanja',
+	student -> antonio,
+	mentor -> bogdan,
+	izraden -> true,
+	potvrden -> true,
+	obranjen -> false	
+].
+
+ipynb:zavrsni[
+	tema -> 'Analiza podataka u Jupyter Notebooku',
+	student -> josip,
+	mentor -> markus,
+	izraden -> true,
+	potvrden -> true,
+	obranjen -> true	
+].
+
+
+
+mlalgo:diplomski[
+	tema -> 'Machine learning algorithms',
+	student -> thomas,
+	mentor -> markus,
+	izraden -> true,
+	potvrden -> true,
+	obranjen -> true	
+].
+
+
+// MODELIRANJE PRAVILA
+
+// Pravilo o završetku studija (I. članak 2)
+// završava polaganjem svih ispita, dovršenjem ostalih studijskih obveza 
+// te izradom završnog rada I njegovom uspješnom obranom
+?student[moze_li_zavrsiti() -> ?moze_li_zavrsiti] :-
+	?student[polozeni_svi_ispiti -> ?pol_svi],
+	?pol_svi == true,
+	?student[rad->?rad_oid],
+	?rad_oid[izraden->?rad_izraden,obranjen->?rad_obranjen],
+	?rad_izraden == true,
+	?rad_obranjen == true,
+	?moze_li_zavrsiti = 'Da, student sliužbeno može završiti studij.'.
+
+
+
+// II. članak 3
+// student je sposoban rješavati problemske zadatke iz stručnih i 
+// znanstvenih područja studija, čak i one s kojima se nije susreo 
+// tijekom studija AKO je student obranio rad
+?student[sposoban() -> ?sposoban] :-
+	?student[rad->?rad_oid],
+	?rad_oid[obranjen->?je_li_obranjen],
+	?je_li_obranjen == true,
+	?sposoban = 'Student je dokazao sposobnost rješavanja problema iz područja njegova studija'.
+
+// II. članak 4. (1)-(3)
+?nastavnik[moze_biti_mentor()->?moze_biti_mentor] :-
+	?nastavnik[zvanje->?zvanje_nastavnika],
+	?zvanje_nastavnika == ('docent' ; 'izvanredni profesor' ; 'redoviti profesor' ; 'redoviti profesor u trajnom zvanju' ; 'predavač' ; 'viši predavač' ; 'profesor visoke škole'),
+	?moze_biti_mentor = 'Da. Može biti mentor.' ;
+	?nastavnik[doktorat->?ima_doktorat],
+	?ima_doktorat == true,
+	?moze_biti_mentor = 'Da. Može biti mentor.' ;
+	?nastavnik[zvanje->?suradnicko],
+	?nastavnik[godine_staza->?staz],
+	?suradnicko == ('asistent' ; 'viši asistent') , 
+	?staz >= 3,
+	?moze_biti_mentor = 'Da. Može biti mentor.'.
+
+// članak 4 (6) i članak 5 (3)
+// Svaki nastavnik u jednoj akademskoj godini može biti mentor završnog rada najviše
+// 10% upisanih studenata u 3. godinu preddiplomskog studija.
+// Svaki nastavnik u jednoj akademskoj godini može biti mentor diplomskog rada najviše
+// 10% upisanih studenata u 2. godinu diplomskog studija.
+?nastavnik[max_mentorstava(?studij_oid)->?max_mentorstava] :-
+	\if (?studij_oid:?tip[], ?tip == preddiplomski)
+	\then (?studij_oid[br_stud_3->?brs3], ?max_mentorstava \is ?brs3 * 0.1) ;
+	\if (?studij_oid:?tip[], ?tip == diplomski)
+	\then (?studij_oid[br_stud_2->?brs2], ?max_mentorstava \is ?brs2 * 0.1).
+
+// članak 6 (1)
+?nastavnik[ukupno_radova(?koji_nastavnik)->?ukupno_radova] :-
+	?ukupno_radova \is count{?mentor|?_:rad[mentor->?mentor], ?mentor == ?koji_nastavnik},
+	\if ?ukupno_radova > 20 \then writeln('Previše radova!')@\io
+	\else writeln('Nije previše radova!')@\io. 
+	
+
+
